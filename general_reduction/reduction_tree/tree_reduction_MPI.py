@@ -17,7 +17,7 @@ from reduction_tree.LP_tree_reduction import *
 from reduction_tree.find_process_data import *
 
 
-def reduction_tree(H, G, Pi=np.zeros((2, 2)), rho=1000, method='LP', lambda_IBP=100, npool=1):
+def reduction_tree(H, G, Pi=np.zeros((2, 2)), rho=1000, method='LP', lambda_IBP=25, npool=1):
     comm = MPI.COMM_WORLD
     rank = 0 # comm.Get_rank()
     pool_size = 1 #

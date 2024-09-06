@@ -83,9 +83,13 @@ def barycenter_IBP(b, M_dist, computation_time=500, iterations_min=100, iteratio
         V = np.divide(Q, K.T @ U)
         Pi = {}
         for m in range(M):
-            u_flat = np.reshape(U[:,m], (U.shape[0],))  # needed to use np.diag
-            v_flat = np.reshape(V[:,m], (V.shape[0],))  # needed to use np.diag
-            Pi[m] = np.diag(u_flat) @ K @ np.diag(v_flat)
+            u_flat = U[:, m]  # no need to reshape
+            v_flat = V[:, m]  # no need to reshape
+            Pi[m] = (u_flat[:, None] * K) * v_flat[None, :]
+            # u_flat = np.reshape(U[:,m], (U.shape[0],))  # needed to use np.diag
+            # v_flat = np.reshape(V[:,m], (V.shape[0],))  # needed to use np.diag
+            # Pi[m] = np.diag(u_flat) @ K @ np.diag(v_flat)
+            # Pi[m] = np.ones((U.shape[0],V.shape[0])) / (U.shape[0]+V.shape[0])
 
         # # Precision:
         Vprecision = np.sum(np.std(UKv, axis=1))
